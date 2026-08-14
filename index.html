@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex AI | Live Demo Portal</title>
+    
+    <!-- Meta Tags for iMessage/WhatsApp Link Sharing Preview -->
+    <title>AI Automation | Live Demo Portal</title>
+    <meta property="og:title" content="AI Automation | Live Demo Portal">
+    <meta property="og:description" content="Test our conversational AI, CRM integrations, and automated dispatch workflows.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1200">
+    <meta property="og:type" content="website">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         
         :root {
-            --bg-color: #020617; /* Slate 950 */
-            --card-bg: #0f172a; /* Slate 900 */
+            --bg-color: #020617; 
+            --card-bg: #0f172a; 
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-1: #3b82f6; /* Blue */
-            --accent-2: #10b981; /* Emerald */
-            --accent-3: #f59e0b; /* Amber */
-            --accent-4: #8b5cf6; /* Violet */
+            --accent-1: #3b82f6; 
+            --accent-2: #10b981; 
+            --accent-3: #f59e0b; 
+            --accent-4: #8b5cf6; 
             --border: #1e293b;
         }
 
@@ -26,16 +33,23 @@
             background-color: var(--bg-color); 
             color: var(--text-main); 
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* Header */
+        /* Animated Header Background */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         header { 
             padding: 30px 50px; 
             border-bottom: 1px solid var(--border); 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            background: rgba(2, 6, 23, 0.8);
+            background: rgba(2, 6, 23, 0.85);
             backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
@@ -50,6 +64,7 @@
             gap: 10px;
         }
         .logo svg { width: 28px; height: 28px; color: var(--accent-1); }
+        .logo span { color: var(--accent-1); }
         
         .partner-badge {
             background: rgba(59, 130, 246, 0.1);
@@ -61,17 +76,29 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
         }
 
-        /* Hero Section */
+        /* Hero Section with animated overlay */
         .hero { 
-            padding: 80px 20px 60px; 
+            padding: 90px 20px 70px; 
             text-align: center; 
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
+            position: relative;
         }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, rgba(2,6,23,0) 70%);
+            z-index: -1;
+            animation: gradientBG 15s ease infinite;
+        }
+
         .hero h1 { 
-            font-size: 48px; 
+            font-size: 52px; 
             font-weight: 800; 
             margin: 0 0 20px; 
             line-height: 1.2;
@@ -83,7 +110,7 @@
             -webkit-text-fill-color: transparent;
         }
         .hero p { 
-            font-size: 18px; 
+            font-size: 19px; 
             color: var(--text-muted); 
             margin: 0; 
         }
@@ -100,28 +127,40 @@
             gap: 30px; 
         }
 
-        /* Cards */
+        /* Enhanced Cards */
         .card { 
             background: var(--card-bg); 
             border: 1px solid var(--border); 
             border-radius: 16px; 
             overflow: hidden; 
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             display: flex;
             flex-direction: column;
         }
+        
         .card:hover { 
             transform: translateY(-8px); 
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4); 
-            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+            border-color: rgba(255,255,255,0.15);
         }
         
+        .card-img-wrapper {
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+        }
+
         .card-img { 
-            height: 200px; 
+            width: 100%;
+            height: 100%;
             background-size: cover; 
             background-position: center; 
-            position: relative;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.08);
         }
         
         /* Specific Industry Accents */
@@ -140,19 +179,24 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2;
         }
-        .card.real-estate .tag { color: var(--accent-1); }
-        .card.auto-repair .tag { color: var(--accent-2); }
-        .card.party-rental .tag { color: var(--accent-4); }
-        .card.hvac .tag { color: var(--accent-3); }
+        
+        .card.real-estate .tag { color: var(--accent-1); border: 1px solid rgba(59, 130, 246, 0.3); }
+        .card.auto-repair .tag { color: var(--accent-2); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .card.party-rental .tag { color: var(--accent-4); border: 1px solid rgba(139, 92, 246, 0.3); }
+        .card.hvac .tag { color: var(--accent-3); border: 1px solid rgba(245, 158, 11, 0.3); }
 
         .card-content { 
             padding: 30px; 
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            position: relative;
+            z-index: 2;
+            background: var(--card-bg);
         }
         .card h2 { 
             margin: 0 0 10px; 
@@ -174,20 +218,20 @@
             font-weight: 600; 
             font-size: 14px;
             letter-spacing: 0.5px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
         }
         
         .card.real-estate .launch-btn { background: rgba(59, 130, 246, 0.1); color: var(--accent-1); }
-        .card.real-estate:hover .launch-btn { background: var(--accent-1); color: var(--white); }
+        .card.real-estate:hover .launch-btn { background: var(--accent-1); color: var(--white); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
 
         .card.auto-repair .launch-btn { background: rgba(16, 185, 129, 0.1); color: var(--accent-2); }
-        .card.auto-repair:hover .launch-btn { background: var(--accent-2); color: var(--white); }
+        .card.auto-repair:hover .launch-btn { background: var(--accent-2); color: var(--white); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
 
         .card.party-rental .launch-btn { background: rgba(139, 92, 246, 0.1); color: var(--accent-4); }
-        .card.party-rental:hover .launch-btn { background: var(--accent-4); color: var(--white); }
+        .card.party-rental:hover .launch-btn { background: var(--accent-4); color: var(--white); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
 
         .card.hvac .launch-btn { background: rgba(245, 158, 11, 0.1); color: var(--accent-3); }
-        .card.hvac:hover .launch-btn { background: var(--accent-3); color: var(--bg-color); }
+        .card.hvac:hover .launch-btn { background: var(--accent-3); color: var(--bg-color); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
 
         footer {
             text-align: center;
@@ -209,7 +253,7 @@
     <header>
         <div class="logo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-            Apex AI
+            AI <span>Solutions</span>
         </div>
         <div class="partner-badge">Authorized Partner Portal</div>
     </header>
@@ -224,7 +268,8 @@
             
             <!-- Real Estate -->
             <a href="https://mitsuuki.github.io/akari-real-estate/" target="_blank" class="card real-estate">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600');">
+                <div class="card-img-wrapper">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Real Estate</div>
                 </div>
                 <div class="card-content">
@@ -236,7 +281,8 @@
 
             <!-- Auto Repair -->
             <a href="https://mitsuuki.github.io/Auto-Repair-Lead-Follow-Up-Engine/" target="_blank" class="card auto-repair">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600');">
+                <div class="card-img-wrapper">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Auto Repair</div>
                 </div>
                 <div class="card-content">
@@ -248,7 +294,8 @@
 
             <!-- Party Rental -->
             <a href="https://mitsuuki.github.io/Party-Rental-Auto-Booker/" target="_blank" class="card party-rental">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=600');">
+                <div class="card-img-wrapper">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Event Rentals</div>
                 </div>
                 <div class="card-content">
@@ -260,7 +307,8 @@
 
             <!-- HVAC -->
             <a href="https://mitsuuki.github.io/apex-hvac-bot/" target="_blank" class="card hvac">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600');">
+                <div class="card-img-wrapper">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Home Services</div>
                 </div>
                 <div class="card-content">
@@ -274,7 +322,7 @@
     </div>
 
     <footer>
-        Apex AI Infrastructure &bull; Confidential Demo Environment
+        &copy; 2026 AI Automation Agency &bull; Confidential Demo Environment
     </footer>
 
 </body>
