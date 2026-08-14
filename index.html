@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex AI | Live Demo Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --bg-color: #020617; /* Slate 950 */
+            --card-bg: #0f172a; /* Slate 900 */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-1: #3b82f6; /* Blue */
+            --accent-2: #10b981; /* Emerald */
+            --accent-3: #f59e0b; /* Amber */
+            --accent-4: #8b5cf6; /* Violet */
+            --border: #1e293b;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header { 
+            padding: 30px 50px; 
+            border-bottom: 1px solid var(--border); 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            letter-spacing: -0.5px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo svg { width: 28px; height: 28px; color: var(--accent-1); }
+        
+        .partner-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero { 
+            padding: 80px 20px 60px; 
+            text-align: center; 
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 { 
+            font-size: 48px; 
+            font-weight: 800; 
+            margin: 0 0 20px; 
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+        .hero h1 span {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p { 
+            font-size: 18px; 
+            color: var(--text-muted); 
+            margin: 0; 
+        }
+
+        /* Grid Layout */
+        .demo-container { 
+            max-width: 1200px; 
+            margin: 0 auto 100px; 
+            padding: 0 20px; 
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+
+        /* Cards */
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 16px; 
+            overflow: hidden; 
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4); 
+            border-color: rgba(255,255,255,0.1);
+        }
+        
+        .card-img { 
+            height: 200px; 
+            background-size: cover; 
+            background-position: center; 
+            position: relative;
+        }
+        
+        /* Specific Industry Accents */
+        .card.real-estate:hover { border-color: var(--accent-1); }
+        .card.auto-repair:hover { border-color: var(--accent-2); }
+        .card.party-rental:hover { border-color: var(--accent-4); }
+        .card.hvac:hover { border-color: var(--accent-3); }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+        }
+        .card.real-estate .tag { color: var(--accent-1); }
+        .card.auto-repair .tag { color: var(--accent-2); }
+        .card.party-rental .tag { color: var(--accent-4); }
+        .card.hvac .tag { color: var(--accent-3); }
+
+        .card-content { 
+            padding: 30px; 
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .card h2 { 
+            margin: 0 0 10px; 
+            font-size: 22px; 
+            color: var(--text-main);
+        }
+        .card p { 
+            margin: 0 0 25px; 
+            color: var(--text-muted); 
+            font-size: 15px; 
+            line-height: 1.6;
+        }
+        
+        .launch-btn { 
+            margin-top: auto;
+            padding: 14px; 
+            text-align: center; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+        }
+        
+        .card.real-estate .launch-btn { background: rgba(59, 130, 246, 0.1); color: var(--accent-1); }
+        .card.real-estate:hover .launch-btn { background: var(--accent-1); color: var(--white); }
+
+        .card.auto-repair .launch-btn { background: rgba(16, 185, 129, 0.1); color: var(--accent-2); }
+        .card.auto-repair:hover .launch-btn { background: var(--accent-2); color: var(--white); }
+
+        .card.party-rental .launch-btn { background: rgba(139, 92, 246, 0.1); color: var(--accent-4); }
+        .card.party-rental:hover .launch-btn { background: var(--accent-4); color: var(--white); }
+
+        .card.hvac .launch-btn { background: rgba(245, 158, 11, 0.1); color: var(--accent-3); }
+        .card.hvac:hover .launch-btn { background: var(--accent-3); color: var(--bg-color); }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 20px; }
+            .hero h1 { font-size: 36px; }
+            .partner-badge { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            Apex AI
+        </div>
+        <div class="partner-badge">Authorized Partner Portal</div>
+    </header>
+
+    <section class="hero">
+        <h1>Industry <span>Automation</span> Demos</h1>
+        <p>Select a live environment below to test conversational AI, CRM integration, and automated dispatch workflows.</p>
+    </section>
+
+    <div class="demo-container">
+        <div class="grid">
+            
+            <!-- Real Estate -->
+            <a href="https://mitsuuki.github.io/akari-real-estate/" target="_blank" class="card real-estate">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600');">
+                    <div class="tag">Real Estate</div>
+                </div>
+                <div class="card-content">
+                    <h2>Property Scheduling Assistant</h2>
+                    <p>Live inventory sync, vision AI document reading, and strict calendar scheduling protocols tailored for brokers.</p>
+                    <div class="launch-btn">Launch Demo &rarr;</div>
+                </div>
+            </a>
+
+            <!-- Auto Repair -->
+            <a href="https://mitsuuki.github.io/Auto-Repair-Lead-Follow-Up-Engine/" target="_blank" class="card auto-repair">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600');">
+                    <div class="tag">Auto Repair</div>
+                </div>
+                <div class="card-content">
+                    <h2>Estimate Follow-Up Engine</h2>
+                    <p>Captures car models and diagnostic issues, routes them to a master CRM, and triggers automated follow-up email loops.</p>
+                    <div class="launch-btn">Launch Demo &rarr;</div>
+                </div>
+            </a>
+
+            <!-- Party Rental -->
+            <a href="https://mitsuuki.github.io/Party-Rental-Auto-Booker/" target="_blank" class="card party-rental">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=600');">
+                    <div class="tag">Event Rentals</div>
+                </div>
+                <div class="card-content">
+                    <h2>Instant Auto-Booker</h2>
+                    <p>Prevents missed calls by instantly checking inventory availability and dropping live Stripe payment links to close deals.</p>
+                    <div class="launch-btn">Launch Demo &rarr;</div>
+                </div>
+            </a>
+
+            <!-- HVAC -->
+            <a href="https://mitsuuki.github.io/apex-hvac-bot/" target="_blank" class="card hvac">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600');">
+                    <div class="tag">Home Services</div>
+                </div>
+                <div class="card-content">
+                    <h2>HVAC Live Dispatcher</h2>
+                    <p>Troubleshoots common AC issues, qualifies leads, and fires instant Telegram alerts to technicians for emergency calls.</p>
+                    <div class="launch-btn">Launch Demo &rarr;</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        Apex AI Infrastructure &bull; Confidential Demo Environment
+    </footer>
+
+</body>
+</html>
