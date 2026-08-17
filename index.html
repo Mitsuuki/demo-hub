@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     
     <!-- Meta Tags for iMessage/WhatsApp Link Sharing Preview -->
     <title>AI Automation | Live Demo Portal</title>
@@ -34,17 +34,27 @@
             color: var(--text-main); 
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         
-        /* Animated Header Background */
+        /* --- ENTRANCE ANIMATIONS --- */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
 
         header { 
-            padding: 30px 50px; 
+            padding: 20px 50px; 
             border-bottom: 1px solid var(--border); 
             display: flex; 
             justify-content: space-between; 
@@ -56,14 +66,14 @@
             z-index: 100;
         }
         .logo { 
-            font-size: 24px; 
+            font-size: 22px; 
             font-weight: 800; 
             letter-spacing: -0.5px; 
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .logo svg { width: 28px; height: 28px; color: var(--accent-1); }
+        .logo svg { width: 26px; height: 26px; color: var(--accent-1); }
         .logo span { color: var(--accent-1); }
         
         .partner-badge {
@@ -72,16 +82,15 @@
             border: 1px solid rgba(59, 130, 246, 0.2);
             padding: 6px 14px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
         }
 
-        /* Hero Section with animated overlay */
+        /* Hero Section */
         .hero { 
-            padding: 90px 20px 70px; 
+            padding: 100px 20px 60px; 
             text-align: center; 
             max-width: 850px;
             margin: 0 auto;
@@ -92,7 +101,7 @@
             content: '';
             position: absolute;
             top: -100%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, rgba(2,6,23,0) 70%);
+            background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, rgba(2,6,23,0) 60%);
             z-index: -1;
             animation: gradientBG 15s ease infinite;
         }
@@ -101,8 +110,8 @@
             font-size: 52px; 
             font-weight: 800; 
             margin: 0 0 20px; 
-            line-height: 1.2;
-            letter-spacing: -1px;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
         }
         .hero h1 span {
             background: linear-gradient(to right, #3b82f6, #8b5cf6);
@@ -110,7 +119,7 @@
             -webkit-text-fill-color: transparent;
         }
         .hero p { 
-            font-size: 19px; 
+            font-size: 18px; 
             color: var(--text-muted); 
             margin: 0; 
         }
@@ -118,13 +127,13 @@
         /* Grid Layout */
         .demo-container { 
             max-width: 1200px; 
-            margin: 0 auto 100px; 
+            margin: 0 auto 80px; 
             padding: 0 20px; 
         }
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px; 
+            gap: 24px; 
         }
 
         /* Enhanced Cards */
@@ -141,13 +150,13 @@
         
         .card:hover { 
             transform: translateY(-8px); 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); 
             border-color: rgba(255,255,255,0.15);
         }
         
         .card-img-wrapper {
             overflow: hidden;
-            height: 200px;
+            height: 180px;
             position: relative;
         }
 
@@ -159,9 +168,7 @@
             transition: transform 0.6s ease;
         }
 
-        .card:hover .card-img {
-            transform: scale(1.08);
-        }
+        .card:hover .card-img { transform: scale(1.08); }
         
         /* Specific Industry Accents */
         .card.real-estate:hover { border-color: var(--accent-1); }
@@ -175,11 +182,11 @@
             right: 15px;
             padding: 6px 12px;
             border-radius: 8px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(2, 6, 23, 0.8);
+            background: rgba(2, 6, 23, 0.85);
             backdrop-filter: blur(8px);
             z-index: 2;
         }
@@ -190,7 +197,7 @@
         .card.hvac .tag { color: var(--accent-3); border: 1px solid rgba(245, 158, 11, 0.3); }
 
         .card-content { 
-            padding: 30px; 
+            padding: 25px; 
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -200,51 +207,98 @@
         }
         .card h2 { 
             margin: 0 0 10px; 
-            font-size: 22px; 
+            font-size: 20px; 
             color: var(--text-main);
         }
         .card p { 
             margin: 0 0 25px; 
             color: var(--text-muted); 
-            font-size: 15px; 
+            font-size: 14px; 
             line-height: 1.6;
         }
         
         .launch-btn { 
             margin-top: auto;
-            padding: 14px; 
+            padding: 12px; 
             text-align: center; 
             border-radius: 8px; 
             font-weight: 600; 
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
         }
         
         .card.real-estate .launch-btn { background: rgba(59, 130, 246, 0.1); color: var(--accent-1); }
-        .card.real-estate:hover .launch-btn { background: var(--accent-1); color: var(--white); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+        .card.real-estate:hover .launch-btn { background: var(--accent-1); color: var(--white); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
 
         .card.auto-repair .launch-btn { background: rgba(16, 185, 129, 0.1); color: var(--accent-2); }
-        .card.auto-repair:hover .launch-btn { background: var(--accent-2); color: var(--white); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+        .card.auto-repair:hover .launch-btn { background: var(--accent-2); color: var(--white); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
 
         .card.party-rental .launch-btn { background: rgba(139, 92, 246, 0.1); color: var(--accent-4); }
-        .card.party-rental:hover .launch-btn { background: var(--accent-4); color: var(--white); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); }
+        .card.party-rental:hover .launch-btn { background: var(--accent-4); color: var(--white); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); }
 
         .card.hvac .launch-btn { background: rgba(245, 158, 11, 0.1); color: var(--accent-3); }
-        .card.hvac:hover .launch-btn { background: var(--accent-3); color: var(--bg-color); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); }
+        .card.hvac:hover .launch-btn { background: var(--accent-3); color: var(--bg-color); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+
+        /* --- NEW OMNICHANNEL SECTION --- */
+        .omnichannel-section {
+            border-top: 1px solid var(--border);
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-color), var(--card-bg));
+        }
+        .omnichannel-section h2 { font-size: 32px; font-weight: 800; margin: 0 0 15px; letter-spacing: -0.5px; }
+        .omnichannel-section p { color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; font-size: 16px; line-height: 1.6; }
+        
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .social-pill {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .social-pill:hover {
+            transform: translateY(-5px);
+            color: var(--text-main);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Brand Colors on Hover */
+        .social-pill.ig:hover { border-color: #E1306C; color: #E1306C; }
+        .social-pill.fb:hover { border-color: #0084FF; color: #0084FF; }
+        .social-pill.wa:hover { border-color: #25D366; color: #25D366; }
+        .social-pill.sms:hover { border-color: #F59E0B; color: #F59E0B; }
 
         footer {
             text-align: center;
             padding: 40px;
             border-top: 1px solid var(--border);
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
+            background: var(--card-bg);
         }
 
         @media (max-width: 768px) {
-            header { padding: 20px; }
-            .hero h1 { font-size: 36px; }
+            header { padding: 15px 20px; }
+            .hero { padding: 60px 20px 40px; }
+            .hero h1 { font-size: 38px; }
             .partner-badge { display: none; }
+            .omnichannel-section { padding: 60px 20px; }
+            .omnichannel-section h2 { font-size: 28px; }
         }
     </style>
 </head>
@@ -258,7 +312,7 @@
         <div class="partner-badge">Authorized Partner Portal</div>
     </header>
 
-    <section class="hero">
+    <section class="hero fade-in">
         <h1>Industry <span>Automation</span> Demos</h1>
         <p>Select a live environment below to test conversational AI, CRM integration, and automated dispatch workflows.</p>
     </section>
@@ -266,8 +320,8 @@
     <div class="demo-container">
         <div class="grid">
             
-            <!-- Real Estate -->
-            <a href="https://mitsuuki.github.io/akari-real-estate/" target="_blank" class="card real-estate">
+            <!-- Real Estate (Target Blank Removed for Same-Page Navigation) -->
+            <a href="https://mitsuuki.github.io/akari-real-estate/" class="card real-estate fade-in delay-1">
                 <div class="card-img-wrapper">
                     <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Real Estate</div>
@@ -280,7 +334,7 @@
             </a>
 
             <!-- Auto Repair -->
-            <a href="https://mitsuuki.github.io/Auto-Repair-Lead-Follow-Up-Engine/" target="_blank" class="card auto-repair">
+            <a href="https://mitsuuki.github.io/Auto-Repair-Lead-Follow-Up-Engine/" class="card auto-repair fade-in delay-2">
                 <div class="card-img-wrapper">
                     <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Auto Repair</div>
@@ -293,7 +347,7 @@
             </a>
 
             <!-- Party Rental -->
-            <a href="https://mitsuuki.github.io/Party-Rental-Auto-Booker/" target="_blank" class="card party-rental">
+            <a href="https://mitsuuki.github.io/Party-Rental-Auto-Booker/" class="card party-rental fade-in delay-3">
                 <div class="card-img-wrapper">
                     <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Event Rentals</div>
@@ -306,7 +360,7 @@
             </a>
 
             <!-- HVAC -->
-            <a href="https://mitsuuki.github.io/apex-hvac-bot/" target="_blank" class="card hvac">
+            <a href="https://mitsuuki.github.io/apex-hvac-bot/" class="card hvac fade-in delay-4">
                 <div class="card-img-wrapper">
                     <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600');"></div>
                     <div class="tag">Home Services</div>
@@ -321,8 +375,33 @@
         </div>
     </div>
 
+    <!-- OMNICHANNEL SHOWCASE -->
+    <section class="omnichannel-section fade-in delay-4">
+        <h2>Deploy Anywhere.</h2>
+        <p>Your clients aren't just on your website. Our AI architecture deploys native integrations directly into the platforms your customers already use daily.</p>
+        
+        <div class="social-grid">
+            <div class="social-pill ig">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                Instagram DM
+            </div>
+            <div class="social-pill fb">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.153 9.769c0-5.385-4.308-9.769-9.615-9.769-5.308 0-9.615 4.384-9.615 9.769 0 3.077 1.538 5.769 4 7.538v3.462l3.692-2c1.692.615 3.538.923 5.538.923 5.308 0 9.615-4.384 9.615-9.769z"></path></svg>
+                Messenger
+            </div>
+            <div class="social-pill wa">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                WhatsApp
+            </div>
+            <div class="social-pill sms">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                SMS & Voice AI
+            </div>
+        </div>
+    </section>
+
     <footer>
-        &copy; 2026 AI Automation Agency &bull; Confidential Demo Environment
+        &copy; 2026 AI Automation Agency &bull; Production Demonstration
     </footer>
 
 </body>
