@@ -3,304 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    
-    <!-- Meta Tags for iMessage/WhatsApp Link Sharing Preview -->
     <title>AI Automation | Live Demo Portal</title>
     <meta property="og:title" content="AI Automation | Live Demo Portal">
     <meta property="og:description" content="Test our conversational AI, CRM integrations, and automated dispatch workflows.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1200">
-    <meta property="og:type" content="website">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-        
-        :root {
-            --bg-color: #020617; 
-            --card-bg: #0f172a; 
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-1: #3b82f6; 
-            --accent-2: #10b981; 
-            --accent-3: #f59e0b; 
-            --accent-4: #8b5cf6; 
-            --border: #1e293b;
-        }
-
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            line-height: 1.6;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        /* --- ENTRANCE ANIMATIONS --- */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-
-        header { 
-            padding: 20px 50px; 
-            border-bottom: 1px solid var(--border); 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(2, 6, 23, 0.85);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo { 
-            font-size: 22px; 
-            font-weight: 800; 
-            letter-spacing: -0.5px; 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo svg { width: 26px; height: 26px; color: var(--accent-1); }
-        .logo span { color: var(--accent-1); }
-        
-        .partner-badge {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Hero Section */
-        .hero { 
-            padding: 100px 20px 60px; 
-            text-align: center; 
-            max-width: 850px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -100%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, rgba(2,6,23,0) 60%);
-            z-index: -1;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        .hero h1 { 
-            font-size: 52px; 
-            font-weight: 800; 
-            margin: 0 0 20px; 
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-        }
-        .hero h1 span {
-            background: linear-gradient(to right, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p { 
-            font-size: 18px; 
-            color: var(--text-muted); 
-            margin: 0; 
-        }
-
-        /* Grid Layout */
-        .demo-container { 
-            max-width: 1200px; 
-            margin: 0 auto 80px; 
-            padding: 0 20px; 
-        }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 24px; 
-        }
-
-        /* Enhanced Cards */
-        .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 16px; 
-            overflow: hidden; 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); 
-            border-color: rgba(255,255,255,0.15);
-        }
-        
-        .card-img-wrapper {
-            overflow: hidden;
-            height: 180px;
-            position: relative;
-        }
-
-        .card-img { 
-            width: 100%;
-            height: 100%;
-            background-size: cover; 
-            background-position: center; 
-            transition: transform 0.6s ease;
-        }
-
-        .card:hover .card-img { transform: scale(1.08); }
-        
-        /* Specific Industry Accents */
-        .card.real-estate:hover { border-color: var(--accent-1); }
-        .card.auto-repair:hover { border-color: var(--accent-2); }
-        .card.party-rental:hover { border-color: var(--accent-4); }
-        .card.hvac:hover { border-color: var(--accent-3); }
-
-        .tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            background: rgba(2, 6, 23, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 2;
-        }
-        
-        .card.real-estate .tag { color: var(--accent-1); border: 1px solid rgba(59, 130, 246, 0.3); }
-        .card.auto-repair .tag { color: var(--accent-2); border: 1px solid rgba(16, 185, 129, 0.3); }
-        .card.party-rental .tag { color: var(--accent-4); border: 1px solid rgba(139, 92, 246, 0.3); }
-        .card.hvac .tag { color: var(--accent-3); border: 1px solid rgba(245, 158, 11, 0.3); }
-
-        .card-content { 
-            padding: 25px; 
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            position: relative;
-            z-index: 2;
-            background: var(--card-bg);
-        }
-        .card h2 { 
-            margin: 0 0 10px; 
-            font-size: 20px; 
-            color: var(--text-main);
-        }
-        .card p { 
-            margin: 0 0 25px; 
-            color: var(--text-muted); 
-            font-size: 14px; 
-            line-height: 1.6;
-        }
-        
-        .launch-btn { 
-            margin-top: auto;
-            padding: 12px; 
-            text-align: center; 
-            border-radius: 8px; 
-            font-weight: 600; 
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-        
-        .card.real-estate .launch-btn { background: rgba(59, 130, 246, 0.1); color: var(--accent-1); }
-        .card.real-estate:hover .launch-btn { background: var(--accent-1); color: var(--white); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
-
-        .card.auto-repair .launch-btn { background: rgba(16, 185, 129, 0.1); color: var(--accent-2); }
-        .card.auto-repair:hover .launch-btn { background: var(--accent-2); color: var(--white); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
-
-        .card.party-rental .launch-btn { background: rgba(139, 92, 246, 0.1); color: var(--accent-4); }
-        .card.party-rental:hover .launch-btn { background: var(--accent-4); color: var(--white); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); }
-
-        .card.hvac .launch-btn { background: rgba(245, 158, 11, 0.1); color: var(--accent-3); }
-        .card.hvac:hover .launch-btn { background: var(--accent-3); color: var(--bg-color); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
-
-        /* --- NEW OMNICHANNEL SECTION --- */
-        .omnichannel-section {
-            border-top: 1px solid var(--border);
-            padding: 80px 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, var(--bg-color), var(--card-bg));
-        }
-        .omnichannel-section h2 { font-size: 32px; font-weight: 800; margin: 0 0 15px; letter-spacing: -0.5px; }
-        .omnichannel-section p { color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; font-size: 16px; line-height: 1.6; }
-        
-        .social-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .social-pill {
-            background: var(--bg-color);
-            border: 1px solid var(--border);
-            padding: 12px 24px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-muted);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .social-pill:hover {
-            transform: translateY(-5px);
-            color: var(--text-main);
-            border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        
-        /* Brand Colors on Hover */
-        .social-pill.ig:hover { border-color: #E1306C; color: #E1306C; }
-        .social-pill.fb:hover { border-color: #0084FF; color: #0084FF; }
-        .social-pill.wa:hover { border-color: #25D366; color: #25D366; }
-        .social-pill.sms:hover { border-color: #F59E0B; color: #F59E0B; }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 13px;
-            background: var(--card-bg);
-        }
-
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .hero { padding: 60px 20px 40px; }
-            .hero h1 { font-size: 38px; }
-            .partner-badge { display: none; }
-            .omnichannel-section { padding: 60px 20px; }
-            .omnichannel-section h2 { font-size: 28px; }
-        }
-    </style>
+    
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body>
 
@@ -320,7 +29,7 @@
     <div class="demo-container">
         <div class="grid">
             
-            <!-- Real Estate (Target Blank Removed for Same-Page Navigation) -->
+            <!-- Real Estate -->
             <a href="https://mitsuuki.github.io/akari-real-estate/" class="card real-estate fade-in delay-1">
                 <div class="card-img-wrapper">
                     <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=600');"></div>
@@ -404,5 +113,32 @@
         &copy; 2026 AI Automation Agency &bull; Production Demonstration
     </footer>
 
+    <!-- Chat Toggle Button -->
+    <button class="chat-toggle" id="chatToggleBtn" onclick="toggleChat()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </button>
+
+    <!-- Dark Mode Chat Widget -->
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <div class="dot"></div> Agency Assistant
+            </div>
+            <button class="close-chat-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <div class="msg bot">Welcome to the Demo Hub! Do you have any questions about how we build these systems, or would you like to schedule a discovery call with our team?</div>
+            <div id="typing-indicator" class="typing-indicator">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <textarea id="user-input" rows="1" placeholder="Type your message..." onkeydown="handleKeyPress(event)"></textarea>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Link to JS -->
+    <script src="script.js?v=1.1"></script>
 </body>
 </html>
