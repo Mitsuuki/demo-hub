@@ -1,5 +1,5 @@
-// --- REPLACE WITH YOUR CLOUDFLARE WEBHOOK PATH ---
-const N8N_WEBHOOK_URL = "https://ships-generators-relative-wma.trycloudflare.com/webhook/demo-hub-chat";
+// --- ACTIVE CLOUDFLARE URL ---
+const N8N_WEBHOOK_URL = "https://exercises-contracting-maternity-dealers.trycloudflare.com/webhook/demo-hub-chat";
 
 let isSending = false;
 
@@ -31,7 +31,7 @@ userInput.addEventListener("input", function() {
     this.style.height = (this.scrollHeight) + "px";
 });
 
-const sessionId = "session_" + Math.floor(Math.random() * 1000000000);
+const sessionId = "hub_session_" + Math.floor(Math.random() * 1000000000);
 const chatBox = document.getElementById("chat-box");
 const sendBtn = document.getElementById("send-btn");
 const typingIndicator = document.getElementById("typing-indicator");
@@ -53,6 +53,15 @@ function hideTyping() {
     typingIndicator.style.display = "none";
 }
 
+function sendSuggested(queryText) {
+    const suggestions = document.getElementById("chat-suggestions");
+    if (suggestions) {
+        suggestions.style.display = "none";
+    }
+    userInput.value = queryText;
+    sendMessage();
+}
+
 async function sendMessage() {
     if (isSending) return;
 
@@ -60,6 +69,12 @@ async function sendMessage() {
     if (!text) return;
 
     isSending = true;
+
+    // Hide suggestions once user starts interacting
+    const suggestions = document.getElementById("chat-suggestions");
+    if (suggestions) {
+        suggestions.style.display = "none";
+    }
 
     appendMessage(text, "user");
     userInput.value = "";
@@ -83,12 +98,12 @@ async function sendMessage() {
         const data = await response.json();
         
         hideTyping();
-        appendMessage(data.text || "Sorry, I encountered an error.", "bot");
+        appendMessage(data.text || "Thanks for your message! Our team will review your inquiry.", "bot");
 
     } catch (error) {
         hideTyping();
         console.error("Transmission Error:", error);
-        appendMessage("Network error or outdated browser detected. Please check your connection.", "bot");
+        appendMessage("Network connection issue detected. Please check your connection or reach out directly.", "bot");
     } finally {
         userInput.disabled = false;
         sendBtn.disabled = false;
