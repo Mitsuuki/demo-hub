@@ -1,5 +1,5 @@
 // --- ACTIVE CLOUDFLARE URL ---
-const N8N_WEBHOOK_URL = 'https://matched-hierarchy-zealand-dui.trycloudflare.com/webhook/demo-hub-chat';
+const N8N_WEBHOOK_URL = 'https://household-islands-answered-relates.trycloudflare.com/webhook/demo-hub-chat';
 
 let isSending = false;
 
